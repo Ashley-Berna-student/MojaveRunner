@@ -8,7 +8,12 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        healthAmount -= damageAmount; 
+        healthAmount -= damageAmount;
+        GameFeel.AddCameraShake(0.1f);
+        if (healthAmount <= 0)
+        {
+            GameManager.instance.Restart();
+        }
 
     }
 
