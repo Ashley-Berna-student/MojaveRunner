@@ -45,7 +45,7 @@ public class Score1 : MonoBehaviour
                 highScore = score;
             }
         }
-        if (score >= 25)
+        if (score == 25)
         {
             EndLevel();
         }
