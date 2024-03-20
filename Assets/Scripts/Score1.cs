@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Score1 : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Score1 : MonoBehaviour
 
     public Text scoreDisplayDark;
     public Text scoreDisplayLight;
+
+    public int nextLevel = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -42,5 +45,22 @@ public class Score1 : MonoBehaviour
                 highScore = score;
             }
         }
+        if (score >= 25)
+        {
+            EndLevel();
+        }
+    }
+
+    public void EndLevel()
+    {
+        if (score >= 25)
+        {
+            Invoke("NextLevel", 1);
+        }
+    }
+
+    void NextLevel()
+    {
+        SceneManager.LoadScene(nextLevel);
     }
 }

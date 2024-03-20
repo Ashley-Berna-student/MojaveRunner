@@ -8,14 +8,19 @@ public class ObstacleSpawner : MonoBehaviour
     public int numberOfInstances = 10;
     public int instanceIndex = 0;
 
-    public float CactusTimeToSpawn;
-    public float WolfTimeToSpawn;
+    public float cactusTimeToSpawn;
+    public float wolfTimeToSpawn;
+
+    public float C1 = 0.0f;
+    public float C2 = 0.0f;
+    public float W1 = 0.0f;
+    public float W2 = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        CactusTimeToSpawn = Random.Range(1.5f,2.5f);
-        WolfTimeToSpawn = Random.Range(10.0f, 15.0f);
+        cactusTimeToSpawn = Random.Range(C1, C2);
+        wolfTimeToSpawn = Random.Range(W1, W2);
 
         obstacleInstances = new GameObject[numberOfInstances];
 
@@ -30,19 +35,19 @@ public class ObstacleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CactusTimeToSpawn -= Time.deltaTime;
-        WolfTimeToSpawn -= Time.deltaTime;
+        cactusTimeToSpawn -= Time.deltaTime;
+        wolfTimeToSpawn -= Time.deltaTime;
 
-            if (CactusTimeToSpawn <= 0)
+            if (cactusTimeToSpawn <= 0 && gameObject.CompareTag("Cactus"))
             {
                 SpawnObstacle();
-                CactusTimeToSpawn = Random.Range(1.5f, 2.5f);
+                cactusTimeToSpawn = Random.Range(C1, C2);
             }
 
-            if (WolfTimeToSpawn <= 0)
+            if (wolfTimeToSpawn <= 0 && gameObject.CompareTag("Wolf"))
             {
                 SpawnObstacle();
-                WolfTimeToSpawn = Random.Range(10.0f, 15.0f);
+                wolfTimeToSpawn = Random.Range(W1, W2);
             }
 
 
@@ -56,6 +61,15 @@ public class ObstacleSpawner : MonoBehaviour
         if (instanceIndex == numberOfInstances)
         {
             instanceIndex = 0;
+        }
+
+        if (gameObject.CompareTag("Cactus"))
+        {
+            cactusTimeToSpawn = Random.Range(C1, C2);
+        }
+        else if (gameObject.CompareTag("Wolf"))
+        {
+            wolfTimeToSpawn = Random.Range(W1, W2);
         }
     }
 }
