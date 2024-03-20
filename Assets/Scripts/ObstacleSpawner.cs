@@ -8,11 +8,14 @@ public class ObstacleSpawner : MonoBehaviour
     public int numberOfInstances = 10;
     public int instanceIndex = 0;
 
-    public float timeToSpawn;
+    public float CactusTimeToSpawn;
+    public float WolfTimeToSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
-        timeToSpawn = Random.Range(1.5f,2.5f);
+        CactusTimeToSpawn = Random.Range(1.5f,2.5f);
+        WolfTimeToSpawn = Random.Range(10.0f, 15.0f);
 
         obstacleInstances = new GameObject[numberOfInstances];
 
@@ -27,13 +30,22 @@ public class ObstacleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeToSpawn -= Time.deltaTime;
+        CactusTimeToSpawn -= Time.deltaTime;
+        WolfTimeToSpawn -= Time.deltaTime;
 
-        if (timeToSpawn <= 0)
-        {
-            SpawnObstacle();
-            timeToSpawn = Random.Range(1.5f,2.5f);
-        }
+            if (CactusTimeToSpawn <= 0)
+            {
+                SpawnObstacle();
+                CactusTimeToSpawn = Random.Range(1.5f, 2.5f);
+            }
+
+            if (WolfTimeToSpawn <= 0)
+            {
+                SpawnObstacle();
+                WolfTimeToSpawn = Random.Range(10.0f, 15.0f);
+            }
+
+
     }
 
     void SpawnObstacle()

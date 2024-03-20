@@ -7,7 +7,7 @@ public class Parallax
 {
     public enum Layer
     {
-        Foreground, Midground, Background
+        Foreground, Midground, Background, Wolf
     }
     public static float speed = 5f;
 
@@ -21,6 +21,8 @@ public class Parallax
                 return speed * 0.5f;
             case Layer.Background:
                 return speed * 0.1f;
+            case Layer.Wolf:
+                return speed * 2.0f;
             default:
                 return speed * 1;
         }
